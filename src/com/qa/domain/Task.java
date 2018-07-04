@@ -13,7 +13,7 @@ public class Task {
     public enum Category {
         Chores, Office, Kids, PersonalDevelopment
     };
-
+    
     public Task(String description, LocalDateTime dateCreated, LocalDateTime dueDate, Category category, String title) {
         this.description = description;
         this.dateCreated = dateCreated;

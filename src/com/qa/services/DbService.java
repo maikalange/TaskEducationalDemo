@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author Administrator
  */
-public final class DatabaseService {
+public final class DbService {
 
     private static final String CONNECTION_URL = "jdbc:derby://localhost:1527/TasksDb;user=task_user;password=task_user";
     private static  Connection conn;
@@ -26,7 +26,7 @@ public final class DatabaseService {
         try {
             return initialiseDatabase(task);
         } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(DatabaseService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DbService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
