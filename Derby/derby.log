@@ -1,0 +1,97 @@
+Mon Jul 02 15:33:02 BST 2018 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
+----------------------------------------------------------------
+Mon Jul 02 15:33:02 BST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0164-5b69-4169-fffffcb78f6a 
+on database directory C:\Users\Administrator\Documents\NetBeansProjects\Task Management Application\Derby\TasksDb with class loader sun.misc.Launcher$AppClassLoader@5e2de80c 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_60/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_60-b27
+user.dir=C:\Program Files\Java\jdk1.8.0_60\db
+os.name=Windows 7
+os.arch=amd64
+os.version=6.1
+derby.system.home=C:\Users\Administrator\Documents\NetBeansProjects\Task Management Application\Derby
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Jul 02 15:35:58 BST 2018:
+Shutting down instance a816c00e-0164-5b69-4169-fffffcb78f6a on database directory C:\Users\Administrator\Documents\NetBeansProjects\Task Management Application\Derby\TasksDb with class loader sun.misc.Launcher$AppClassLoader@5e2de80c 
+Mon Jul 02 15:35:58 BST 2018 Thread[DRDAConnThread_3,5,main] (DATABASE = TasksDb), (DRDAID = {3}), Database 'TasksDb' shutdown.
+Mon Jul 02 15:36:53 BST 2018 Thread[DRDAConnThread_3,5,main] Cleanup action starting
+java.sql.SQLException: Database 'TasksDB' not found.
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.getNewEmbedConnection(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
+	at org.apache.derby.jdbc.EmbeddedDriver.connect(Unknown Source)
+	at org.apache.derby.impl.drda.Database.makeConnection(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
+Caused by: ERROR XJ004: Database 'TasksDB' not found.
+	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(Unknown Source)
+	... 18 more
+============= begin nested exception, level (1) ===========
+ERROR XJ004: Database 'TasksDB' not found.
+	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.getNewEmbedConnection(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
+	at org.apache.derby.jdbc.EmbeddedDriver.connect(Unknown Source)
+	at org.apache.derby.impl.drda.Database.makeConnection(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
+============= end nested exception, level (1) ===========
+Cleanup action completed
+Mon Jul 02 15:36:53 BST 2018 Thread[DRDAConnThread_3,5,main] (DATABASE = TasksDB), (DRDAID = {4}), Database 'TasksDB' not found.
+----------------------------------------------------------------
+Mon Jul 02 15:37:49 BST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance e0b94027-0164-5b69-4169-fffffcb78f6a 
+on database directory C:\Users\Administrator\Documents\NetBeansProjects\Task Management Application\Derby\TasksDB with class loader sun.misc.Launcher$AppClassLoader@5e2de80c 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_60/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_60-b27
+user.dir=C:\Program Files\Java\jdk1.8.0_60\db
+os.name=Windows 7
+os.arch=amd64
+os.version=6.1
+derby.system.home=C:\Users\Administrator\Documents\NetBeansProjects\Task Management Application\Derby
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Jul 02 15:37:56 BST 2018:
+Shutting down instance e0b94027-0164-5b69-4169-fffffcb78f6a on database directory C:\Users\Administrator\Documents\NetBeansProjects\Task Management Application\Derby\TasksDB with class loader sun.misc.Launcher$AppClassLoader@5e2de80c 
+Mon Jul 02 15:37:56 BST 2018 Thread[DRDAConnThread_3,5,main] (DATABASE = TasksDB), (DRDAID = {6}), Database 'TasksDB' shutdown.
+----------------------------------------------------------------
+Mon Jul 02 15:38:05 BST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance 52da80c5-0164-5b69-4169-fffffcb78f6a 
+on database directory C:\Users\Administrator\Documents\NetBeansProjects\Task Management Application\Derby\TasksDB with class loader sun.misc.Launcher$AppClassLoader@5e2de80c 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_60/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_60-b27
+user.dir=C:\Program Files\Java\jdk1.8.0_60\db
+os.name=Windows 7
+os.arch=amd64
+os.version=6.1
+derby.system.home=C:\Users\Administrator\Documents\NetBeansProjects\Task Management Application\Derby
+Database Class Loader started - derby.database.classpath=''
