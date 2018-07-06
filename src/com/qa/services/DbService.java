@@ -11,8 +11,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.derby.jdbc.ClientDriver;
@@ -21,7 +22,8 @@ import org.apache.derby.jdbc.ClientDriver;
  *
  * @author Administrator
  */
-public final class DbService {    
+public final class DbService {
+
     private static Connection conn;
     private static ClientDriver driver;
 
@@ -34,26 +36,56 @@ public final class DbService {
             conn = DriverManager.getConnection(CONNECTION_URL);
         }
     }
-    
-    public Task getTaskById(int id){
-        Task task=null;
-        String findSQL  = "SELECT * FROM TASK_USER.\"Tasks\" WHERE ID  = ?;";
+
+    public List<Task> findTasksByCategory(Task.Category category) {
+        String sql = "SELECT ID,TITLE,DESCRIPTION,DUEDATE,DATECREATED FROM TASK_USER.\"Tasks\"     where \"Category\" = '?'";
+        List<Task> tasks = new ArrayList<>();
         try {
-            PreparedStatement statement  = conn.prepareStatement(findSQL);
+            initialiseDbConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, category.name());
             ResultSet results = statement.executeQuery();
-            while(results.next()){
-                String title  = results.getString("Title");
-                String description  = results.getString("Description");
-                String category  = results.getString("Category");
-                
-                LocalDateTime dueDate  = LocalDateTime.parse(results.getString("DueDate"));
-                LocalDateTime dateCreated  = LocalDateTime.parse(results.getString("DateCreated"));
-                task  = new Task(description,dateCreated, dueDate, Task.Category.valueOf(category), title);
+            Task t;
+            while (results.next()) {
+                String title = results.getString("title");
+                String description = results.getString("description");
+
+                LocalDateTime dueDate = LocalDateTime.parse(results.getString("dueDate"));
+                LocalDateTime dateCreated = LocalDateTime.parse(results.getString("dateCreated"));
+                int id = results.getInt("Id");
+
+                t = new Task(description, dateCreated, dueDate, category, title);
+                tasks.add(t);
             }
-        } catch (SQLException ex) {
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(DbService.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
+        return tasks;
+    }
+
+    public Task findTaskById(int id) {
+
+        Task task = null;
+        String findSQL = "SELECT Title,Description,DueDate,DateCreated,Category FROM TASK_USER.\"Tasks\" WHERE ID  = ?;";
+        try {
+            initialiseDbConnection();
+            PreparedStatement statement = conn.prepareStatement(findSQL);
+            statement.setInt(1, id);
+            ResultSet results = statement.executeQuery();
+
+            while (results.next()) {
+                String title = results.getString("Title");
+                String description = results.getString("Description");
+                String category = results.getString("Category");
+
+                LocalDateTime dueDate = LocalDateTime.parse(results.getString("DueDate"));
+                LocalDateTime dateCreated = LocalDateTime.parse(results.getString("DateCreated"));
+                task = new Task(description, dateCreated, dueDate, Task.Category.valueOf(category), title);
+            }
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(DbService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return task;
     }
 
@@ -86,5 +118,4 @@ public final class DbService {
 
         return false;
     }
-
 }

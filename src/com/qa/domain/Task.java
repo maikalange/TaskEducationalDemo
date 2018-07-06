@@ -9,10 +9,13 @@ public class Task {
     private final LocalDateTime dueDate;
     private final String title;
     private final Category category;
+    private  final int id;
 
     public enum Category {
         Chores, Office, Kids, PersonalDevelopment
     };
+    
+
     
     public Task(String description, LocalDateTime dateCreated, LocalDateTime dueDate, Category category, String title) {
         this.description = description;
@@ -20,6 +23,7 @@ public class Task {
         this.dueDate = dueDate;
         this.category = category;
         this.title = title;
+        this.id = 0;
     }
 
     public Category getCategory() {
