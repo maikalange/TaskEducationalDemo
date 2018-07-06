@@ -7,6 +7,7 @@ package com.qa.services;
 
 import com.qa.domain.Task;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,13 +55,37 @@ public final class DbService {
                 LocalDateTime dateCreated = LocalDateTime.parse(results.getString("dateCreated"));
                 int id = results.getInt("Id");
 
-                t = new Task(description, dateCreated, dueDate, category, title);
+                t = new Task(description, dateCreated, dueDate, category, title, 0);
                 tasks.add(t);
             }
+            conn = null;
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(DbService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return tasks;
+    }
+
+    public boolean updateTask(Task task) {
+        boolean success = false;
+        try {
+            String updateSQL = "UPDATE TASK_USER.\"Tasks\"  SET     \"Category\" = '?',  \"Title\" ='?',  \"Description\" ='?',  \"DueDate\" ='?' ,\"DateCreated\" ='?'  WHERE Id=?;";
+            PreparedStatement statement = conn.prepareStatement(updateSQL);
+            statement.setString(1, task.getCategory().name());
+            statement.setString(2, task.getTitle());
+            statement.setString(3, task.getDescription());
+
+            statement.setDate(4, Date.valueOf(task.getDueDate().toLocalDate()));
+            statement.setDate(5, Date.valueOf(task.getDateCreated().toLocalDate()));
+            statement.setInt(6, task.getId());
+
+            statement.setString(7, updateSQL);
+            statement.executeUpdate();
+
+            success = true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DbService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return success;
     }
 
     public Task findTaskById(int id) {
@@ -80,8 +105,9 @@ public final class DbService {
 
                 LocalDateTime dueDate = LocalDateTime.parse(results.getString("DueDate"));
                 LocalDateTime dateCreated = LocalDateTime.parse(results.getString("DateCreated"));
-                task = new Task(description, dateCreated, dueDate, Task.Category.valueOf(category), title);
+                task = new Task(description, dateCreated, dueDate, Task.Category.valueOf(category), title, id);
             }
+            conn = null;
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(DbService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -106,7 +132,7 @@ public final class DbService {
 
             statement.closeOnCompletion();
             success = true;
-
+            conn = null;
         } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(DbService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -114,8 +140,16 @@ public final class DbService {
     }
 
     public static boolean delete(int id) {
-        String sql = "DELETE Tasks WHERE Id=?";
-
-        return false;
+        String sql = "Delete FROM TASK_USER.\"Tasks\" where id =?;\"";
+        boolean isSuccess  = false;
+        try {
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.execute();
+            isSuccess =  true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DbService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isSuccess;
     }
 }

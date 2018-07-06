@@ -9,21 +9,23 @@ public class Task {
     private final LocalDateTime dueDate;
     private final String title;
     private final Category category;
-    private  final int id;
+    private final int id;
+
+    public int getId() {
+        return id;
+    }
 
     public enum Category {
         Chores, Office, Kids, PersonalDevelopment
     };
-    
 
-    
-    public Task(String description, LocalDateTime dateCreated, LocalDateTime dueDate, Category category, String title) {
+    public Task(String description, LocalDateTime dateCreated, LocalDateTime dueDate, Category category, String title, int id) {
         this.description = description;
         this.dateCreated = dateCreated;
         this.dueDate = dueDate;
         this.category = category;
         this.title = title;
-        this.id = 0;
+        this.id = id;
     }
 
     public Category getCategory() {
