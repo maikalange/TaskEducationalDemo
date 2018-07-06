@@ -9,7 +9,10 @@ import com.qa.domain.Task;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.derby.jdbc.ClientDriver;
@@ -30,6 +33,28 @@ public final class DbService {
         if (conn == null) {
             conn = DriverManager.getConnection(CONNECTION_URL);
         }
+    }
+    
+    public Task getTaskById(int id){
+        Task task=null;
+        String findSQL  = "SELECT * FROM TASK_USER.\"Tasks\" WHERE ID  = ?;";
+        try {
+            PreparedStatement statement  = conn.prepareStatement(findSQL);
+            ResultSet results = statement.executeQuery();
+            while(results.next()){
+                String title  = results.getString("Title");
+                String description  = results.getString("Description");
+                String category  = results.getString("Category");
+                
+                LocalDateTime dueDate  = LocalDateTime.parse(results.getString("DueDate"));
+                LocalDateTime dateCreated  = LocalDateTime.parse(results.getString("DateCreated"));
+                task  = new Task(description,dateCreated, dueDate, Task.Category.valueOf(category), title);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DbService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        return task;
     }
 
     public static boolean save(Task task) {
