@@ -17,7 +17,7 @@ public class TaskDbTest {
        Assert.assertTrue(isSaved);
     }
     
-    public void deleteTask(){
+    public void testDeleteTask(){
         
     }
 
