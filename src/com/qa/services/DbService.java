@@ -21,7 +21,7 @@ import org.apache.derby.jdbc.ClientDriver;
 
 /**
  *
- * @author Administrator
+ * @author Nyirenda Joseph A.
  */
 public final class DbService {
 
@@ -66,7 +66,7 @@ public final class DbService {
     }
 
     public boolean updateTask(Task task) {
-        boolean success = false;
+        boolean isUpdateSuccess = false;
         try {
             String updateSQL = "UPDATE TASK_USER.\"Tasks\"  SET     \"Category\" = '?',  \"Title\" ='?',  \"Description\" ='?',  \"DueDate\" ='?' ,\"DateCreated\" ='?'  WHERE Id=?;";
             PreparedStatement statement = conn.prepareStatement(updateSQL);
@@ -81,11 +81,11 @@ public final class DbService {
             statement.setString(7, updateSQL);
             statement.executeUpdate();
 
-            success = true;
+            isUpdateSuccess = true;
         } catch (SQLException ex) {
             Logger.getLogger(DbService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return success;
+        return isUpdateSuccess;
     }
 
     public Task findTaskById(int id) {
